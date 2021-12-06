@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  build:
+    image: "papyruscs-base"
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+  build-linux:
+    image: "papyruscs-base"
+    depends_on:
+      - build
+    environment:
+      BUILD_ENV: "linux"
+    volumes:
+      - ./output:/source/build
+    
+
+  build-win:
+    image: "papyruscs-base"
+    depends_on:
+      - build
+    environment:
+      BUILD_ENV: "windows"
+    volumes:
+      - ./output:/source/build
